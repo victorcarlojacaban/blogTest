@@ -5,6 +5,7 @@
               <img
                 src="https://mdbootstrap.com/img/new/standard/city/062.jpg"
                 class="card-img-top"
+                height="300px"
                 alt="..."
               />
               <div class="card-body">

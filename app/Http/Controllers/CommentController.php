@@ -22,7 +22,8 @@ class CommentController extends Controller
         return Comment::create([
         	'blog_id'   => request('blog_id'),
         	'content'   => request('content'),
-        	'commentor' => request('commentor')
+        	'commentor' => request('commentor'),
+        	'parent_id' => request('parent_id')
         ]);
     }
 }
