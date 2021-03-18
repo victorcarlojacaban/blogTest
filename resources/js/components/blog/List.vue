@@ -99,6 +99,7 @@ export default {
                     content: '',
                     commentor: '',
                 };
+                this.errors = null;
             }).catch(error=>{
                 this.errors = error.response.data.errors;
             });
