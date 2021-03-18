@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('blog', App\Http\Controllers\BlogController::class)->only(['index']);
-
 Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
-Route::post('create_comment', [CommentController::class, 'store'])->name('comment.store');
+Route::post('create_comment', [CommentController::class, 'store'])->name('comment.store');	
