@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Comment;
 use App\Http\Requests\Comment\StoreRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\CommentRepository;

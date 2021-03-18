@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Blog;
 use Illuminate\Http\Request;
 use App\Repositories\BlogRepository;
 use App\Http\Controllers\Controller;
