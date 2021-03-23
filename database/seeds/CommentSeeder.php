@@ -25,14 +25,16 @@ class CommentSeeder extends Seeder
         	'parent_id'   => $firstComment->id,
         	'commentor'   => 'Paul',
         	'content'     => 'Ipsum dolor sit amet, consectetur elit',
-        	'blog_id'     => $firstComment->blog->id
+        	'blog_id'     => $firstComment->blog->id,
+            'depth'       => 2,
         ]);
 
         $thirdComment = Comment::create([
         	'parent_id'   => $secondComment->id,
         	'commentor'   => 'Matthew',
         	'content'     => 'Consectetur elit',
-        	'blog_id'     => $secondComment->blog->id
+        	'blog_id'     => $secondComment->blog->id,
+            'depth'       => 3,
         ]);
     }
 }

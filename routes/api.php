@@ -21,4 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/getCommentsByBlogId/{blogId}', [CommentController::class, 'getCommentsByBlogId'])->name('comment.get_comment_by_blog');
 Route::post('create_comment', [CommentController::class, 'store'])->name('comment.store');	
+Route::post('reply_comment', [CommentController::class, 'replyComment'])->name('comment.reply');	

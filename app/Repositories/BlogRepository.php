@@ -12,14 +12,14 @@ use App\Blog;
 class BlogRepository
 {
     /**
-     * @var CommentLike
+     * @var Blog
      */
     protected $model;
 
     /**
      * BlogRepository constructor.
      * 
-     * @param CommentLike $commentLike
+     * @param Blog $blog
      */
     public function __construct(Blog $blog)
     {
@@ -29,17 +29,10 @@ class BlogRepository
     /**
      * Get all blogs with comments
      * 
-     * @param  string|null $commentParent parent id of comment
-     * 
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function getAll($commentParent = null)
+    public function getAll()
     {
-        return $blogs = $this->model
-            ->with(['comments' => function ($q) use ($commentParent) {
-                $q->with('replies.replies')
-                    ->where('parent_id', $commentParent)
-                    ->orderBy('id', 'desc');
-            }])->get();
+        return $this->model->all();
     }
 }

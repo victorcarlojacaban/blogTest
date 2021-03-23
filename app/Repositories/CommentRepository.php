@@ -37,6 +37,12 @@ class CommentRepository
     {
         try {
             return DB::transaction(function () use ($requestData) {
+                if (!empty($requestData['parent_id'])) {
+                    $parentComment = $this->model->find($requestData['parent_id']);
+                    $requestData['depth']   = $parentComment->parents_count;
+                    $requestData['blog_id'] = $parentComment->blog_id;
+                }
+
                 return $this->model->create($requestData);
             });
         } catch (\Exception $e) {
@@ -48,5 +54,22 @@ class CommentRepository
                 'err' => true
             ];
         }
+    }
+
+    /**
+     * Fetch commments by blog Id
+     * 
+     * @param  integer $blogId blog id
+     * 
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function fetchByBlogId($blogId)
+    {
+        return $this->model
+                ->where('blog_id', $blogId)
+                ->with('replies.replies')
+                ->where('parent_id', null)
+                ->orderBy('id', 'desc')
+                ->get();
     }
 }

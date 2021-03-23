@@ -14,8 +14,6 @@ class Comment extends Model
         'readable_created_at',
     ];
 
-    protected $with = 'replies';
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -40,5 +38,25 @@ class Comment extends Model
     public function getReadableCreatedAtAttribute()
     {
         return $this->created_at->diffForHumans();
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Comment', 'parent_id');
+    }
+
+
+    public function getParentsCountAttribute()
+    {
+        $parents = 1;
+
+        $parent = $this->parent;
+
+        while(!is_null($parent)) {
+            $parents += 1;
+            $parent = $parent->parent;
+        }
+
+        return $parents;
     }
 }
