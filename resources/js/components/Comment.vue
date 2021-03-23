@@ -8,8 +8,7 @@
                 <p>{{ comment.readable_created_at }}</p>
             </div>
         </div>
-        <a class="d-flex align-items-center text-muted ml-1" @click="$set(comment, 'expanded', true)"
-            v-if="comment.replies && !comment.expanded">
+         <a class="d-flex align-items-center text-muted ml-1" @click="$set(comment, 'expanded', true)" v-if="comment.replies && !comment.expanded && comment.depth <= 3">
             <i class="material-icons"></i> {{ comment.replies.length }} replies:
         </a>
         <div v-if="comment.replies && comment.expanded">
@@ -19,7 +18,14 @@
 
             <Comment v-for="(comment, key) in comment.replies" :comment="comment" :key="key"></Comment>
 
-            <div v-if="comment.depth <= 2">
+            <div v-if="comment.depth <= 3">
+                <div v-if="errors" class="alert alert-danger shadow-lg">
+                  <div v-for="(v, k) in errors" :key="k">
+                    <p v-for="error in v" :key="error" class="text-sm" >
+                      {{ error }}
+                    </p>
+                  </div>
+                </div>
                 <h6 class="card-title">Reply</h6>
                 <form @submit.prevent="replyComment(comment.id)">
                     <div class="row">
@@ -64,7 +70,6 @@ export default {
             commentData:{
                 content:"",
                 commentor:"",
-                blog_id: ""
             },
             errors: null
         }
@@ -80,7 +85,15 @@ export default {
         replyComment(commentId) {
             this.commentData.parent_id = commentId;
             axios.post('/api/create_comment',this.commentData).then(response=> {
-                eventBus.$emit('getComments');
+                this.comment.replies.push({
+                    id: response.data.id,
+                    content: response.data.content,
+                    commentor: response.data.commentor,
+                    readable_created_at: response.data.readable_created_at,
+                    depth: response.data.depth + 1,
+                    expanded: false,
+                    replies: response.data.replies
+                });
 
                 this.commentData = {
                     content: '',
@@ -88,6 +101,7 @@ export default {
                 };
                 this.errors = null;
             }).catch(error=>{
+                console.log(error);
                 this.errors = error.response.data.errors;
             });
         }

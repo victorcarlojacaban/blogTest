@@ -18,7 +18,8 @@ class CommentSeeder extends Seeder
         $firstComment = Comment::create([
         	'commentor'   => 'John',
         	'content'     => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-        	'blog_id'     => $blog->id
+        	'blog_id'     => $blog->id,
+            'depth'       => 1,
         ]);
 
         $secondComment = Comment::create([

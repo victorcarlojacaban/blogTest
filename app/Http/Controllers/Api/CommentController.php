@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\Comment\StoreRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\CommentRepository;
@@ -37,6 +36,13 @@ class CommentController extends Controller
         $comments = $this->commentRepo->fetchByBlogId($blogId);
 
         return response()->json($comments);
+    }
+
+    public function getCommentsById($commentId)
+    {
+        $comment = $this->commentRepo->find(id);
+
+        return response()->json($comment);
     }
 
 	/**

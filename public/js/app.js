@@ -17338,6 +17338,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -17347,8 +17353,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       commentData: {
         content: "",
-        commentor: "",
-        blog_id: ""
+        commentor: ""
       },
       errors: null
     };
@@ -17369,13 +17374,23 @@ __webpack_require__.r(__webpack_exports__);
 
       this.commentData.parent_id = commentId;
       axios.post('/api/create_comment', this.commentData).then(function (response) {
-        _app_js__WEBPACK_IMPORTED_MODULE_2__["eventBus"].$emit('getComments');
+        _this.comment.replies.push({
+          id: response.data.id,
+          content: response.data.content,
+          commentor: response.data.commentor,
+          readable_created_at: response.data.readable_created_at,
+          depth: response.data.depth + 1,
+          expanded: false,
+          replies: response.data.replies
+        });
+
         _this.commentData = {
           content: '',
           commentor: ''
         };
         _this.errors = null;
       })["catch"](function (error) {
+        console.log(error);
         _this.errors = error.response.data.errors;
       });
     }
@@ -36090,7 +36105,7 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm.comment.replies && !_vm.comment.expanded
+    _vm.comment.replies && !_vm.comment.expanded && _vm.comment.depth <= 3
       ? _c(
           "a",
           {
@@ -36129,8 +36144,36 @@ var render = function() {
               return _c("Comment", { key: key, attrs: { comment: comment } })
             }),
             _vm._v(" "),
-            _vm.comment.depth <= 2
+            _vm.comment.depth <= 3
               ? _c("div", [
+                  _vm.errors
+                    ? _c(
+                        "div",
+                        { staticClass: "alert alert-danger shadow-lg" },
+                        _vm._l(_vm.errors, function(v, k) {
+                          return _c(
+                            "div",
+                            { key: k },
+                            _vm._l(v, function(error) {
+                              return _c(
+                                "p",
+                                { key: error, staticClass: "text-sm" },
+                                [
+                                  _vm._v(
+                                    "\n                  " +
+                                      _vm._s(error) +
+                                      "\n                "
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("h6", { staticClass: "card-title" }, [_vm._v("Reply")]),
                   _vm._v(" "),
                   _c(

@@ -52,15 +52,15 @@ class Comment extends Model
      */
     public function getParentsCountAttribute()
     {
-        $parents = 1;
+        $parentCount = 1;
 
         $parent = $this->parent;
 
         while(!is_null($parent)) {
-            $parents += 1;
             $parent = $parent->parent;
+            $parentCount += 1;
         }
 
-        return $parents;
+        return $parentCount;
     }
 }

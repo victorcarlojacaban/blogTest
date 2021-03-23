@@ -39,11 +39,21 @@ class CommentRepository
             return DB::transaction(function () use ($requestData) {
                 if (!empty($requestData['parent_id'])) {
                     $parentComment = $this->model->find($requestData['parent_id']);
-                    $requestData['depth']   = $parentComment->parents_count;
-                    $requestData['blog_id'] = $parentComment->blog_id;
+
+                    if ($parentComment) {
+                        // from parent comment, down to the child comment
+                        $requestData['depth']   = $parentComment->parents_count + 1;
+                        $requestData['blog_id'] = $parentComment->blog_id;
+                    }
                 }
 
-                return $this->model->create($requestData);
+                $comment = $this->model->create($requestData);
+
+                if (!empty($comment)) {
+                    $comment = $this->model->with('replies')->find($comment->id);
+                }
+                
+                return $comment;
             });
         } catch (\Exception $e) {
             // log error
