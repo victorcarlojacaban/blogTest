@@ -41,6 +41,6 @@
 `http://localhost:8000/blogs`
 
 #### Sample Display
+<img width="790" alt="Screen Shot 2021-03-23 at 11 24 31 PM" src="https://user-images.githubusercontent.com/14358139/112176376-02047780-8c33-11eb-8e97-8c17e81f1104.png">
 
-<img width="802" alt="Screen Shot 2021-03-18 at 3 52 55 PM" src="https://user-images.githubusercontent.com/14358139/111591152-07605d00-8802-11eb-904b-a33948ac9189.png">
 
