@@ -38,13 +38,6 @@ class CommentController extends Controller
         return response()->json($comments);
     }
 
-    public function getCommentsById($commentId)
-    {
-        $comment = $this->commentRepo->find(id);
-
-        return response()->json($comment);
-    }
-
 	/**
 	 * Store resource
 	 * 

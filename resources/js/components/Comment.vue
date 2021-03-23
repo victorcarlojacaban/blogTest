@@ -62,7 +62,6 @@
 <script>
 import Avatar from './Avatar';
 import Comment from './Comment';
-import {eventBus} from "./../app.js";
 export default {
     name: 'Comment',
     data(){

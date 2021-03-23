@@ -50,9 +50,9 @@ class CommentRepository
                 $comment = $this->model->create($requestData);
 
                 if (!empty($comment)) {
-                    $comment = $this->model->with('replies')->find($comment->id);
+                    $comment = $this->findById($comment->id);
                 }
-                
+
                 return $comment;
             });
         } catch (\Exception $e) {
@@ -64,6 +64,19 @@ class CommentRepository
                 'err' => true
             ];
         }
+    }
+
+    /**
+     * Find resource by id
+     * 
+     * @param  integer $commentId comment id
+     * 
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function findById($commentId)
+    {
+        return $this->model->with('replies')
+                    ->findOrFail($commentId);
     }
 
     /**

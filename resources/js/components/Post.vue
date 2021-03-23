@@ -58,7 +58,6 @@
 
 <script>
 import Comment from './Comment';
-import {eventBus} from "./../app.js";
 export default {
     name: 'Post',
     data(){
@@ -81,12 +80,9 @@ export default {
     mounted(){
         this.getComments()
     },
-    created() {
-        eventBus.$on('getComments', () => {
-            this.getComments();
-        })
+    components: {
+        Comment
     },
-    components: {Comment},
     methods:{
         getComments() {
             axios.get('/api/getCommentsByBlogId/' + this.post.id).then(response=>{
@@ -98,7 +94,7 @@ export default {
         },
         postComment(blogId) {
             this.comment.blog_id = blogId;
-            axios.post('/api/create_comment',this.comment).then(response=> {
+            axios.post('/api/create_comment', this.comment).then(response=> {
                 this.getComments()
                 this.comment = {
                     content: '',
