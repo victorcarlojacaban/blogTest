@@ -12,7 +12,7 @@ export default {
     props: {
         text: {
             type: String,
-            default: 'John Doe'
+            default: 'Laravel'
         },
         size: {
             type: String,

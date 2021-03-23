@@ -1,12 +1,26 @@
 <template>
-    <div id="app">
-        <div class="row">
-            <div class="col-12" v-if="blogs.length > 0">
-                <Post v-for="(post, key) in blogs" :post="post" :key="key">
-                 </Post>
+    <main>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <router-link to="/" class="navbar-brand" href="#">Blog App</router-link>
+                <div class="collapse navbar-collapse">
+                    <div class="navbar-nav">
+                        <router-link exact-active-class="active" to="/blogs" class="nav-item nav-link">Blogs</router-link>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-5">
+            <div id="app">
+                <div class="row">
+                    <div class="col-12" v-if="blogs.length > 0">
+                        <Post v-for="(post, key) in blogs" :post="post" :key="key">
+                         </Post>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>

@@ -17071,6 +17071,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
@@ -17123,7 +17137,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     text: {
       type: String,
-      "default": 'John Doe'
+      "default": 'Laravel'
     },
     size: {
       type: String,
@@ -36022,18 +36036,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "app" } }, [
-    _c("div", { staticClass: "row" }, [
-      _vm.blogs.length > 0
-        ? _c(
-            "div",
-            { staticClass: "col-12" },
-            _vm._l(_vm.blogs, function(post, key) {
-              return _c("Post", { key: key, attrs: { post: post } })
-            }),
-            1
-          )
-        : _vm._e()
+  return _c("main", [
+    _c("nav", { staticClass: "navbar navbar-expand-lg navbar-dark bg-dark" }, [
+      _c(
+        "div",
+        { staticClass: "container-fluid" },
+        [
+          _c(
+            "router-link",
+            { staticClass: "navbar-brand", attrs: { to: "/", href: "#" } },
+            [_vm._v("Blog App")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "collapse navbar-collapse" }, [
+            _c(
+              "div",
+              { staticClass: "navbar-nav" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-item nav-link",
+                    attrs: { "exact-active-class": "active", to: "/blogs" }
+                  },
+                  [_vm._v("Blogs")]
+                )
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container mt-5" }, [
+      _c("div", { attrs: { id: "app" } }, [
+        _c("div", { staticClass: "row" }, [
+          _vm.blogs.length > 0
+            ? _c(
+                "div",
+                { staticClass: "col-12" },
+                _vm._l(_vm.blogs, function(post, key) {
+                  return _c("Post", { key: key, attrs: { post: post } })
+                }),
+                1
+              )
+            : _vm._e()
+        ])
+      ])
     ])
   ])
 }
