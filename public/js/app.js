@@ -17079,13 +17079,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      blogs: [],
-      comment: {
-        content: "",
-        commentor: "",
-        blog_id: ""
-      },
-      errors: null
+      blogs: []
     };
   },
   mounted: function mounted() {

@@ -19,12 +19,6 @@ export default {
     data() {
         return {
             blogs: [],
-            comment:{
-                content:"",
-                commentor:"",
-                blog_id: ""
-            },
-            errors: null
         };
     },
     mounted(){

@@ -45,7 +45,11 @@ class Comment extends Model
         return $this->belongsTo('App\Comment', 'parent_id');
     }
 
-
+    /**
+     * Get parents count attribute
+     * 
+     * @return integer
+     */
     public function getParentsCountAttribute()
     {
         $parents = 1;
