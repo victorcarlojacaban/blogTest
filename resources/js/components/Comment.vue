@@ -8,7 +8,7 @@
                 <p>{{ comment.readable_created_at }}</p>
             </div>
         </div>
-         <a class="d-flex align-items-center text-muted ml-1" @click="$set(comment, 'expanded', true)" v-if="comment.replies && !comment.expanded && comment.depth <= 3">
+         <a class="d-flex align-items-center text-muted ml-1" @click="$set(comment, 'expanded', true)" v-if="comment.replies && !comment.expanded && comment.depth < 3">
             <i class="material-icons"></i> {{ comment.replies.length }} replies:
         </a>
         <div v-if="comment.replies && comment.expanded">
@@ -18,7 +18,7 @@
 
             <Comment v-for="(comment, key) in comment.replies" :comment="comment" :key="key"></Comment>
 
-            <div v-if="comment.depth <= 3">
+            <div v-if="comment.depth < 3">
                 <div v-if="errors" class="alert alert-danger shadow-lg">
                   <div v-for="(v, k) in errors" :key="k">
                     <p v-for="error in v" :key="error" class="text-sm" >
@@ -89,8 +89,7 @@ export default {
                     content: response.data.content,
                     commentor: response.data.commentor,
                     readable_created_at: response.data.readable_created_at,
-                    depth: response.data.depth + 1,
-                    expanded: false,
+                    depth: response.data.depth,
                     replies: response.data.replies
                 });
 

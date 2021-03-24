@@ -17391,8 +17391,7 @@ __webpack_require__.r(__webpack_exports__);
           content: response.data.content,
           commentor: response.data.commentor,
           readable_created_at: response.data.readable_created_at,
-          depth: response.data.depth + 1,
-          expanded: false,
+          depth: response.data.depth,
           replies: response.data.replies
         });
 
@@ -36145,7 +36144,7 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm.comment.replies && !_vm.comment.expanded && _vm.comment.depth <= 3
+    _vm.comment.replies && !_vm.comment.expanded && _vm.comment.depth < 3
       ? _c(
           "a",
           {
@@ -36184,7 +36183,7 @@ var render = function() {
               return _c("Comment", { key: key, attrs: { comment: comment } })
             }),
             _vm._v(" "),
-            _vm.comment.depth <= 3
+            _vm.comment.depth < 3
               ? _c("div", [
                   _vm.errors
                     ? _c(
